@@ -23,14 +23,14 @@ body {
 
 /* Custom premium styles */
 .grid-bg {
-  background-size: 60px 60px;
+  background-size: 64px 64px;
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
 }
 
 .radial-glow {
-  background: radial-gradient(circle 800px at 50% 200px, rgba(16, 185, 129, 0.07), transparent 80%);
+  background: radial-gradient(circle 500px at 50% 250px, rgba(16, 185, 129, 0.05), transparent 75%);
 }
 
 .card-hover {
@@ -38,9 +38,59 @@ body {
 }
 
 .card-hover:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 15px 35px -10px rgba(16, 185, 129, 0.2);
+}
+
+/* Spotlight Glowing Border Card */
+.spotlight-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+  overflow: hidden;
+}
+
+.spotlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(300px circle at var(--x, 0px) var(--y, 0px), rgba(255, 255, 255, 0.03), transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(200px circle at var(--x, 0px) var(--y, 0px), rgba(16, 185, 129, 0.25), transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
 }
 
 .emerald-glow {

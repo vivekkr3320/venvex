@@ -266,6 +266,14 @@ export default function Home() {
     printWindow.document.close();
   };
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--x', `${x}px`);
+    e.currentTarget.style.setProperty('--y', `${y}px`);
+  };
+
   return (
     <div className="relative min-h-screen bg-dark-bg text-white selection:bg-accent-emerald selection:text-dark-bg overflow-x-hidden">
       {/* Raw vertical layout separator line running down the screen */}
@@ -351,9 +359,9 @@ export default function Home() {
             </div>
 
             {/* Master Header */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-none max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-[-0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 leading-none max-w-4xl mx-auto font-sans">
               A Suite of Single-Purpose<br className="hidden md:inline" /> Software Modules.<br />
-              <span className="bg-gradient-to-r from-accent-emerald via-emerald-400 to-teal-400 bg-clip-text text-transparent font-mono">
+              <span className="bg-gradient-to-r from-accent-emerald via-emerald-400 to-teal-400 bg-clip-text text-transparent font-mono tracking-tighter">
                 Built for Absolute Speed.
               </span>
             </h1>
@@ -388,7 +396,7 @@ export default function Home() {
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-accent-emerald/10 to-teal-500/10 blur-xl opacity-50 group-hover:opacity-70 transition-opacity pointer-events-none" />
               
               {/* Frame Container */}
-              <div className="relative bg-slate-950/80 border border-border-dark rounded-xl p-4 md:p-8 backdrop-blur-md overflow-hidden flex flex-col md:flex-row gap-6 items-stretch">
+              <div className="relative bg-slate-950/70 border border-white/5 border-t-white/10 rounded-xl p-4 md:p-8 backdrop-blur-md overflow-hidden flex flex-col md:flex-row gap-6 items-stretch shadow-2xl">
                 {/* Control Panel (left) */}
                 <div className="md:w-1/3 flex flex-col justify-between space-y-4 text-left border-b md:border-b-0 md:border-r border-border-dark pb-4 md:pb-0 md:pr-6">
                   <div className="space-y-4">
@@ -408,7 +416,7 @@ export default function Home() {
                           type="text" 
                           value={heroClient} 
                           onChange={(e) => setHeroClient(e.target.value)}
-                          className="w-full bg-dark-bg/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none focus:border-accent-emerald text-xs"
+                          className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                         />
                       </div>
                       <div>
@@ -417,7 +425,7 @@ export default function Home() {
                           type="text" 
                           value={heroItem} 
                           onChange={(e) => setHeroItem(e.target.value)}
-                          className="w-full bg-dark-bg/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none focus:border-accent-emerald text-xs"
+                          className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                         />
                       </div>
                       <div className="grid grid-cols-2 gap-2">
@@ -427,7 +435,7 @@ export default function Home() {
                             type="number" 
                             value={heroQty} 
                             onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
-                            className="w-full bg-dark-bg/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none focus:border-accent-emerald text-xs"
+                            className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                           />
                         </div>
                         <div>
@@ -436,7 +444,7 @@ export default function Home() {
                             type="number" 
                             value={heroRate} 
                             onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
-                            className="w-full bg-dark-bg/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none focus:border-accent-emerald text-xs"
+                            className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                           />
                         </div>
                       </div>
@@ -450,7 +458,7 @@ export default function Home() {
                 </div>
                 
                 {/* Hyper-realistic white A4 document layout preview (right) */}
-                <div className="flex-1 bg-white text-slate-900 rounded-lg p-6 shadow-2xl flex flex-col justify-between min-h-[380px] text-left transform md:rotate-1 md:group-hover:rotate-0 transition-transform duration-300 relative">
+                <div className="flex-1 bg-white text-slate-900 rounded-lg p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[380px] text-left transform md:rotate-1 md:group-hover:rotate-0 transition-transform duration-300 relative">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
                   <div>
                     {/* A4 Header */}
@@ -555,18 +563,19 @@ export default function Home() {
               {/* Card 1: Invoicely */}
               <div 
                 onClick={handleInvoiceGeneratorClick}
-                className="group relative bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer card-hover overflow-hidden"
+                onMouseMove={handleMouseMove}
+                className="group spotlight-card bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer overflow-hidden"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded bg-emerald-950/30 border border-emerald-900/50 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded bg-emerald-950/30 border border-emerald-900/50 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform relative z-10">
                       <FileText className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-accent-emerald bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-900/40">
+                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-accent-emerald bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-900/40 relative z-10">
                       Module 01
                     </span>
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 relative z-10">
                     <h3 className="text-lg font-bold group-hover:text-accent-emerald transition-colors font-mono">Invoicely Engine v1.0</h3>
                     <div className="text-[10px] font-mono text-text-slate uppercase tracking-wider">Mobile Billing / High-Speed Generation</div>
                     <p className="text-xs text-text-slate leading-relaxed">
@@ -576,7 +585,7 @@ export default function Home() {
                 </div>
 
                 {/* Minimalist professional white A4 preview widget breaking cleanly out of a dark container line */}
-                <div className="absolute -bottom-4 left-6 right-6 h-20 bg-white border border-slate-200 shadow-2xl rounded-t-md p-2 overflow-hidden text-slate-800 flex flex-col justify-between text-[5px] font-mono transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute -bottom-4 left-6 right-6 h-20 bg-white border border-slate-200 shadow-2xl rounded-t-md p-2 overflow-hidden text-slate-800 flex flex-col justify-between text-[5px] font-mono transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-10">
                   <div className="flex justify-between items-start border-b border-slate-300 pb-0.5">
                     <span className="font-bold tracking-tighter">VENVEX // INVOICELY</span>
                     <span>#INV-2026</span>
@@ -598,18 +607,19 @@ export default function Home() {
               {/* Card 2: Webhooks (Route) */}
               <div 
                 onClick={() => setActiveModal('webhook')}
-                className="group relative bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer card-hover"
+                onMouseMove={handleMouseMove}
+                className="group spotlight-card bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 rounded bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform relative z-10">
                       <Terminal className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-amber-500 bg-amber-950/30 px-2.5 py-1 rounded border border-amber-900/30">
+                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-amber-500 bg-amber-950/30 px-2.5 py-1 rounded border border-amber-900/30 relative z-10">
                       Module 02
                     </span>
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 relative z-10">
                     <h3 className="text-lg font-bold group-hover:text-amber-500 transition-colors font-mono">Venvex Route v1.2</h3>
                     <div className="text-[10px] font-mono text-text-slate uppercase tracking-wider">Automation / Data Routing</div>
                     <p className="text-xs text-text-slate leading-relaxed">
@@ -618,13 +628,23 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Simulated Webhook logs in card */}
-                <div className="bg-black/60 border border-border-dark/60 rounded p-2.5 h-16 font-mono text-[8px] text-green-400 overflow-hidden space-y-1">
-                  <div>POST /v1/broadcast - HTTP 200 OK</div>
-                  <div className="text-text-slate">{"{ relayed: true, nodes: 12, latencyMs: 14 }"}</div>
+                {/* macOS Mini IDE style console */}
+                <div className="bg-black/80 border border-border-dark/60 rounded-lg p-3 h-20 font-mono text-[8px] space-y-1 relative pt-7 overflow-hidden z-10">
+                  {/* Window Controls */}
+                  <div className="absolute top-2.5 left-3.5 flex gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]/70" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]/70" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]/70" />
+                  </div>
+                  <div className="text-emerald-500 font-bold">
+                    POST <span className="text-[#00F2FE]">/v1/broadcast</span> <span className="text-slate-500">- HTTP 200 OK</span>
+                  </div>
+                  <div className="text-slate-400">
+                    {"{"} <span className="text-[#F59E0B]">"relayed"</span>: <span className="text-emerald-400">true</span>, <span className="text-[#F59E0B]">"latencyMs"</span>: <span className="text-emerald-400">14</span> {"}"}
+                  </div>
                 </div>
 
-                <div className="pt-4 border-t border-border-dark/60 flex items-center justify-between text-[10px] font-mono">
+                <div className="pt-4 border-t border-border-dark/60 flex items-center justify-between text-[10px] font-mono relative z-10">
                   <span className="font-bold text-amber-500">
                     99.999% Core Uptime
                   </span>
@@ -634,7 +654,8 @@ export default function Home() {
 
               {/* Card 3: [ Empty Slot // Allocation Pending ] */}
               <div 
-                className="group relative border border-dashed border-border-dark bg-transparent rounded-xl p-6 flex flex-col justify-between h-[340px] overflow-hidden card-hover"
+                onMouseMove={handleMouseMove}
+                className="group spotlight-card border border-dashed border-border-dark bg-transparent rounded-xl p-6 flex flex-col justify-between h-[340px] overflow-hidden"
               >
                 {/* Dashed Background Grid overlay */}
                 <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
