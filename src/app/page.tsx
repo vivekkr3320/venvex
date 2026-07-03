@@ -255,11 +255,7 @@ export default function Home() {
 
   // Handle invoice generator card click
   const handleInvoiceGeneratorClick = () => {
-    if (sessionUser) {
-      setActiveModal('dashboard');
-    } else {
-      setActiveModal('auth');
-    }
+    setActiveModal('manifesto');
   };
 
   // Metadata Stripper state
@@ -467,7 +463,7 @@ export default function Home() {
               }} 
               className="hover:text-white transition-colors cursor-pointer"
             >
-              [ Utilities ]
+              [ Architecture ]
             </button>
             <button 
               onClick={() => {
@@ -476,7 +472,7 @@ export default function Home() {
               }} 
               className="hover:text-white transition-colors cursor-pointer"
             >
-              [ Core Telemetry ]
+              [ Live Network ]
             </button>
             <button 
               onClick={() => {
@@ -484,7 +480,7 @@ export default function Home() {
               }} 
               className="hover:text-white transition-colors cursor-pointer"
             >
-              [ Documentation ]
+              [ Manifesto ]
             </button>
           </nav>
 
@@ -495,15 +491,11 @@ export default function Home() {
             </span>
             <button 
               onClick={() => {
-                if (sessionUser) {
-                  setActiveModal('dashboard');
-                } else {
-                  setActiveModal('auth');
-                }
+                setActiveModal('manifesto');
               }}
               className="relative group px-4 py-2 border border-accent-emerald text-accent-emerald font-mono text-[11px] uppercase tracking-wider hover:bg-accent-emerald hover:text-dark-bg transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.15)] rounded cursor-pointer"
             >
-              [ Access Core ]
+              [ Initialize System ]
             </button>
           </div>
         </header>
@@ -529,7 +521,7 @@ export default function Home() {
               </div>
               <div className="space-y-4 font-mono text-xs relative z-10 px-1">
                 <div>
-                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Client Name</label>
+                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Target Identity Node</label>
                   <input 
                     type="text" 
                     value={heroClient} 
@@ -538,7 +530,7 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Item Description</label>
+                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Operation Protocol</label>
                   <input 
                     type="text" 
                     value={heroItem} 
@@ -610,20 +602,20 @@ export default function Home() {
                         <div className="text-[7px] font-mono text-slate-400 uppercase tracking-widest mt-0.5">Core Software Suite</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-[10px] font-bold tracking-widest uppercase">INVOICE</div>
-                        <div className="text-[7px] font-mono text-slate-400 mt-0.5">#INV-2026-009</div>
+                        <div className="text-[10px] font-bold tracking-widest uppercase">TELEMETRY</div>
+                        <div className="text-[7px] font-mono text-slate-400 mt-0.5">#TEL-2026-CORE</div>
                       </div>
                     </div>
                     
                     {/* Metadata */}
                     <div className="grid grid-cols-2 gap-4 my-3 text-[8px] font-mono">
                       <div>
-                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">ISSUER</div>
+                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">REGISTRY</div>
                         <div className="font-bold text-slate-800">Venvex Core Systems, Inc.</div>
                         <div className="text-slate-500">Edge Gateway Node US-01</div>
                       </div>
                       <div>
-                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">BILLED TO</div>
+                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">TARGET NODE</div>
                         <div className="font-bold text-slate-800">{heroClient || 'Client Name'}</div>
                         <div className="text-slate-500">Sandbox Client Session</div>
                       </div>
@@ -633,10 +625,10 @@ export default function Home() {
                     <table className="w-full text-left border-collapse text-[8px] my-3 font-mono">
                       <thead>
                         <tr className="border-b border-slate-300 text-[6px] font-bold text-slate-400 uppercase tracking-wider">
-                          <th className="py-1">Description</th>
-                          <th className="py-1 text-right">Qty</th>
+                          <th className="py-1">Operation Protocol</th>
                           <th className="py-1 text-right">Rate</th>
-                          <th className="py-1 text-right">Total</th>
+                          <th className="py-1 text-right">Offset</th>
+                          <th className="py-1 text-right">Load Quotient</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -656,32 +648,32 @@ export default function Home() {
                     <div className="flex flex-col gap-1 items-start">
                       {heroTaxRate === 18 ? (
                         <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse bg-emerald-50/50">
-                          PAID // COMPILED
+                          VERIFIED // SIGNED
                         </div>
                       ) : (
                         <div className="border border-amber-500 text-amber-500 text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[2deg] font-mono">
-                          DRAFT // READY
+                          STAGE // LOCAL
                         </div>
                       )}
                       <button 
                         onClick={exportInvoice}
                         className="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-[7px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
                       >
-                        [ Print A4 ]
+                        [ Export Metric ]
                       </button>
                     </div>
                     
                     <div className="text-right space-y-0.5 text-[8px] w-1/2 font-mono">
                       <div className="flex justify-between text-slate-500">
-                        <span>Subtotal:</span>
+                        <span>Base Load:</span>
                         <span>${(heroQty * heroRate).toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-slate-500">
-                        <span>GST ({heroTaxRate}%):</span>
+                        <span>Variance ({heroTaxRate}%):</span>
                         <span>${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between text-slate-900 font-bold border-t border-slate-300 pt-1 text-[9px]">
-                        <span>Grand Total:</span>
+                        <span>Net System Load:</span>
                         <span>${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
                       </div>
                     </div>
@@ -715,21 +707,21 @@ export default function Home() {
                     <FileText className="w-4 h-4" />
                   </div>
                   <span className="text-[9px] font-mono uppercase font-bold tracking-widest text-accent-emerald bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/40 relative z-10">
-                    Module 01
+                    ENGINE I
                   </span>
                 </div>
                 <div className="space-y-1 relative z-10">
-                  <h3 className="text-base font-bold group-hover:text-accent-emerald transition-colors font-mono text-white">Invoicely Engine v1.0</h3>
-                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">Mobile Billing / High-Speed Generation</div>
+                  <h3 className="text-base font-bold group-hover:text-accent-emerald transition-colors font-mono text-white">Invoicely Core v1.0</h3>
+                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">High-Speed Document Compilation</div>
                   <p className="text-xs text-text-slate leading-relaxed pt-2">
-                    A zero-bloat mobile billing utility designed for immediate execution. Generate hyper-minimalist, professional A4 invoices instantly.
+                    A zero-bloat gateway utility designed for mathematical compiling. Model and generate precise telemetry sheets with instant hardware latency output.
                   </p>
                 </div>
               </div>
 
               <div className="pt-3 border-t border-border-dark/60 flex items-center justify-between text-[9px] font-mono relative z-10">
                 <span className="font-bold text-accent-emerald">
-                  0.04s Generation
+                  0.04s Execution
                 </span>
                 <ChevronRight className="w-3.5 h-3.5 text-text-slate group-hover:text-accent-emerald group-hover:translate-x-1 transition-all" />
               </div>
@@ -740,29 +732,25 @@ export default function Home() {
               {/* Centered System Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-950/80 border border-white/5 text-[9px] font-mono tracking-widest text-[#10B981] shadow-inner uppercase">
                 <span className="flex h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
-                [ System Log: Ven_Core_Active ]
+                [ VENVEX CORE INITIATIVE ]
               </div>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 font-sans">
-                Ready to Deploy?
+                The VENVEX Core
               </h2>
               
               <p className="text-xs text-text-slate max-w-xs leading-relaxed">
-                Stop paying for feature-bloat. Integrate isolated, high-performance tools directly into your active workflow layers.
+                Precision-engineered developer systems. Deploying local-first, low-latency telemetry structures directly to gateway nodes.
               </p>
               
               <div className="pt-2">
                 <button 
                   onClick={() => {
-                    if (sessionUser) {
-                      setActiveModal('dashboard');
-                    } else {
-                      setActiveModal('auth');
-                    }
+                    setActiveModal('manifesto');
                   }}
                   className="px-8 py-3.5 rounded glow-button text-dark-bg font-bold font-mono text-xs uppercase tracking-wider hover:scale-[1.02] transition-all cursor-pointer animate-pulse"
                 >
-                  [ Secure Instant Access ]
+                  [ Open Core Manifesto ]
                 </button>
               </div>
             </div>
@@ -788,26 +776,26 @@ export default function Home() {
                     <Plus className="w-4 h-4 text-text-slate" />
                   </div>
                   <span className="text-[9px] font-mono uppercase font-bold tracking-widest text-text-slate border border-dashed border-border-dark px-2 py-0.5 rounded">
-                    Module 03
+                    ENGINE III
                   </span>
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-base font-bold text-text-slate font-mono">Module 03 Allocation</h3>
-                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">Pipeline / In Development</div>
+                  <h3 className="text-base font-bold text-text-slate font-mono">Registry Allocation</h3>
+                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">Cryptographic Processing / Queued</div>
                   <p className="text-xs text-text-slate leading-relaxed pt-2">
-                    Slot reserved for incoming single-purpose developer utilities. Deploying dedicated processing tools directly.
+                    Expansion registry reserved for incoming micro-services. Modeling parallel thread gateways and low-level diagnostic engines.
                   </p>
                 </div>
               </div>
 
               <div className="border border-dashed border-border-dark/60 rounded py-1.5 text-center font-mono text-[8px] text-text-slate relative z-10">
-                // ENCRYPTED PROTOCOL RESERVATION
+                // SECURE REGISTER SEQUENCE
               </div>
 
               <div className="pt-3 border-t border-dashed border-border-dark/60 flex items-center justify-between text-[9px] font-mono relative z-10 text-text-slate">
                 <span className="font-bold flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-600" />
-                  Status: Queued
+                  Registry State: Locked
                 </span>
                 <span>[ Pending ]</span>
               </div>
