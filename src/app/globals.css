@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #0B0F19;
-  --color-card-bg: #121826;
+  --color-dark-bg: #232323;
+  --color-card-bg: #1c1c1c;
   --color-accent-emerald: #10B981;
   --color-neon-cyan: #00F2FE;
-  --color-border-dark: #1F293D;
+  --color-border-dark: #2d2d2d;
   --color-text-slate: #94A3B8;
 }
 
 :root {
-  --background: #0B0F19;
+  --background: #232323;
   --foreground: #ffffff;
 }
 
@@ -203,16 +203,18 @@ body {
   transform: scale(1.03);
 }
 
-/* Skeuomorphic Textures & Tones */
 .carbon-bg {
-  background-color: #0b0f19;
-  background-image: 
-    linear-gradient(45deg, #0d121f 25%, transparent 25%), 
-    linear-gradient(-45deg, #0d121f 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #0d121f 75%), 
-    linear-gradient(-45deg, transparent 75%, #0d121f 75%);
-  background-size: 8px 8px;
-  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  background-color: #232323;
+  background-image: linear-gradient(
+    to bottom,
+    #232323 0%,
+    #232323 88%,
+    rgba(0, 0, 0, 0.65) 88%,
+    #121212 88.2%,
+    #1c1c1c 88.3%,
+    #1c1c1c 100%
+  );
+  background-attachment: fixed;
 }
 
 .brushed-metal {
