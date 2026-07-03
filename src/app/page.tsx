@@ -14,6 +14,79 @@ import Dashboard from '@/components/Dashboard';
 import PaymentWall from '@/components/PaymentWall';
 import { supabase, hasSupabaseConfig } from '@/lib/supabaseClient';
 
+const TechBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    {/* Grid Overlay */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,242,254,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,242,254,0.01)_1px,transparent_1px)] bg-[size:32px_32px]" />
+
+    {/* SVG Circuits & Honeycombs */}
+    <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="cyan-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#00F2FE" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#0B0F19" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="emerald-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.10" />
+          <stop offset="100%" stopColor="#0B0F19" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Ambient Glows */}
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#cyan-glow)" className="opacity-70" />
+      <circle cx="20%" cy="40%" r="400" fill="url(#emerald-glow)" />
+      <circle cx="80%" cy="60%" r="400" fill="url(#cyan-glow)" />
+
+      {/* Hexagonal Mesh (Left Side) */}
+      <path 
+        d="M 50,200 L 100,170 L 150,200 L 150,260 L 100,290 L 50,260 Z M 150,200 L 200,170 L 250,200 L 250,260 L 200,290 L 150,260" 
+        stroke="rgba(0, 242, 254, 0.05)" 
+        strokeWidth="1" 
+        fill="none" 
+      />
+      <path 
+        d="M 100,290 L 150,320 L 150,380 L 100,410 L 50,380 L 50,320 Z" 
+        stroke="rgba(16, 185, 129, 0.04)" 
+        strokeWidth="1" 
+        fill="none" 
+      />
+
+      {/* Hexagonal Mesh (Right Side) */}
+      <path 
+        d="M 900,400 L 950,370 L 1000,400 L 1000,460 L 950,490 L 900,460 Z M 1000,400 L 1050,370 L 1100,400 L 1100,460 L 1050,490 L 1000,460" 
+        stroke="rgba(0, 242, 254, 0.05)" 
+        strokeWidth="1" 
+        fill="none" 
+      />
+
+      {/* Circuit lines */}
+      <path d="M 0,150 L 150,150 L 200,200 L 300,200" stroke="rgba(0, 242, 254, 0.12)" strokeWidth="1" fill="none" />
+      <path d="M 150,150 L 180,120 L 280,120" stroke="rgba(16, 185, 129, 0.1)" strokeWidth="1" fill="none" />
+      <path d="M 1000,250 L 900,250 L 850,300 L 700,300" stroke="rgba(0, 242, 254, 0.12)" strokeWidth="1" fill="none" />
+
+      {/* Nodes */}
+      <circle cx="300" cy="200" r="3" fill="#00F2FE" />
+      <circle cx="280" cy="120" r="2.5" fill="#10B981" />
+      <circle cx="700" cy="300" r="3" fill="#00F2FE" />
+    </svg>
+
+    {/* Floating Code Snippets */}
+    <div className="absolute top-[22%] left-[6%] font-mono text-[8px] text-[#00F2FE]/10 select-none hidden lg:block space-y-1">
+      <div>const relay = new WebhookRelay();</div>
+      <div>relay.on('packet', (data) =&gt; {"{"}</div>
+      <div className="pl-4">process.stdout.write(data.sign);</div>
+      <div>{"}"});</div>
+    </div>
+
+    <div className="absolute top-[48%] right-[4%] font-mono text-[8px] text-[#10B981]/10 select-none hidden lg:block space-y-1">
+      <div># VENVEX CORE CONFIGURATION</div>
+      <div>PORT=3000</div>
+      <div>SECURITY_LEVEL=MAX</div>
+      <div>LATENCY_BUDGET=12ms</div>
+    </div>
+  </div>
+);
+
 export default function Home() {
   // Navigation active links / simulated route
   const [activeTab, setActiveTab] = useState<'all' | 'specs' | 'changelog'>('all');
@@ -280,8 +353,7 @@ export default function Home() {
       <div className="vertical-split-line" />
 
       {/* Dynamic Background Overlays */}
-      <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none z-0" />
-      <div className="absolute inset-0 radial-glow pointer-events-none z-0" />
+      <TechBackground />
 
       {/* Main Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col min-h-screen">
@@ -348,363 +420,206 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Hero Section */}
-        <main className="flex-1 flex flex-col justify-center py-12 md:py-20 z-10">
-          <div className="text-center max-w-4xl mx-auto space-y-6 md:space-y-8">
+        {/* Restructured Mockup Layout */}
+        <main className="flex-1 flex flex-col justify-center py-10 md:py-16 z-10 relative">
+          
+          {/* Shifting A4 Interactive Preview on a 3D Pedestal */}
+          <div className="relative mt-8 md:mt-12 w-full max-w-5xl mx-auto z-20 flex flex-col md:flex-row gap-8 items-center justify-center">
             
-            {/* Centered Upper Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-card-bg border border-border-dark text-[10px] font-mono tracking-widest text-accent-emerald shadow-inner">
-              <span className="flex h-2 w-2 rounded-full bg-accent-emerald animate-pulse" />
-              [ SYSTEM LOG: VEN_CORE_ACTIVE ]
-            </div>
-
-            {/* Master Header */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-[-0.04em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 leading-none max-w-4xl mx-auto font-sans">
-              A Suite of Single-Purpose<br className="hidden md:inline" /> Software Modules.<br />
-              <span className="bg-gradient-to-r from-accent-emerald via-emerald-400 to-teal-400 bg-clip-text text-transparent font-mono tracking-tighter">
-                Built for Absolute Speed.
-              </span>
-            </h1>
-
-            {/* Sub-text */}
-            <p className="text-base sm:text-lg md:text-xl text-text-slate max-w-3xl mx-auto leading-relaxed">
-              Venvex is a zero-bloat software ecosystem. We engineer razor-sharp, isolated micro-utilities designed to replace massive, heavy platforms with lightning-fast execution layers. No clutter. Just raw computing utility.
-            </p>
-
-            {/* Tactical Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 font-mono text-xs">
-              <button 
-                onClick={() => {
-                  const el = document.getElementById('grid-section');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full sm:w-auto px-8 py-3.5 rounded bg-accent-emerald text-dark-bg font-bold hover:bg-emerald-400 transition-all duration-300 shadow-[0_0_25px_rgba(16,185,129,0.3)] hover:scale-[1.02] cursor-pointer"
-              >
-                [ Explore the Vault ] →
-              </button>
-              <button 
-                onClick={() => setActiveModal('manifesto')}
-                className="w-full sm:w-auto px-8 py-3.5 rounded bg-card-bg border border-border-dark text-white font-semibold hover:border-white transition-all duration-300 cursor-pointer"
-              >
-                [ View Documentation ]
-              </button>
-            </div>
-
-            {/* Shifting A4 Interactive Preview on a 3D Pedestal */}
-            <div className="relative mt-12 md:mt-24 w-full max-w-4xl mx-auto z-20 flex flex-col md:flex-row gap-8 items-center justify-center">
-              
-              {/* Sleek, collapsible Sandbox Input Controller (Floating on the left) */}
-              <div className="w-full md:w-[260px] bg-slate-950/80 border border-white/5 rounded-xl p-5 backdrop-blur-md text-left shadow-2xl relative z-30 self-center">
-                <div className="text-[10px] font-mono text-accent-emerald mb-3 tracking-widest flex items-center gap-1.5 uppercase">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-ping" />
-                  Sandbox Controller
+            {/* Sleek, collapsible Sandbox Input Controller (Floating on the left) */}
+            <div className="w-full md:w-[260px] bg-slate-950/80 border border-white/5 rounded-xl p-5 backdrop-blur-md text-left shadow-2xl relative z-30 self-center">
+              <div className="text-[10px] font-mono text-accent-emerald mb-3 tracking-widest flex items-center gap-1.5 uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-ping" />
+                Sandbox Controller
+              </div>
+              <div className="space-y-3 font-mono text-xs">
+                <div>
+                  <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Client Name</label>
+                  <input 
+                    type="text" 
+                    value={heroClient} 
+                    onChange={(e) => setHeroClient(e.target.value)}
+                    className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                  />
                 </div>
-                <div className="space-y-3 font-mono text-xs">
+                <div>
+                  <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Item Description</label>
+                  <input 
+                    type="text" 
+                    value={heroItem} 
+                    onChange={(e) => setHeroItem(e.target.value)}
+                    className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Client Name</label>
+                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Qty</label>
                     <input 
-                      type="text" 
-                      value={heroClient} 
-                      onChange={(e) => setHeroClient(e.target.value)}
+                      type="number" 
+                      value={heroQty} 
+                      onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
                       className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                     />
                   </div>
                   <div>
-                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Item Description</label>
+                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Rate ($)</label>
                     <input 
-                      type="text" 
-                      value={heroItem} 
-                      onChange={(e) => setHeroItem(e.target.value)}
+                      type="number" 
+                      value={heroRate} 
+                      onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
                       className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Qty</label>
-                      <input 
-                        type="number" 
-                        value={heroQty} 
-                        onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
-                        className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Rate ($)</label>
-                      <input 
-                        type="number" 
-                        value={heroRate} 
-                        onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
-                        className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-text-slate mt-4 space-y-1">
-                  <div>COMPILE SPEED: <span className="text-accent-emerald font-bold">0.04s</span></div>
-                  <div>SECURITY: <span className="text-accent-emerald">SHA-256 SIGNED</span></div>
                 </div>
               </div>
+              <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-text-slate mt-4 space-y-1">
+                <div>COMPILE SPEED: <span className="text-accent-emerald font-bold">0.04s</span></div>
+                <div>SECURITY: <span className="text-accent-emerald">SHA-256 SIGNED</span></div>
+              </div>
+            </div>
 
-              {/* Tilted Pedestal + A4 invoice block */}
-              <div className="pedestal-wrap flex-1 flex justify-center items-center">
-                <div className="pedestal-slab">
-                  {/* Neon Cyan Base Shadow underneath */}
-                  <div className="pedestal-glow" />
+            {/* Tilted Pedestal + A4 invoice block */}
+            <div className="pedestal-wrap flex-1 flex justify-center items-center">
+              <div className="pedestal-slab">
+                {/* Neon Cyan Base Shadow underneath */}
+                <div className="pedestal-glow" />
 
-                  {/* Hyper-realistic white A4 document layout preview */}
-                  <div className="bg-white text-slate-900 rounded-lg p-5 flex flex-col justify-between min-h-[360px] text-left relative overflow-hidden shadow-2xl">
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
-                    <div>
-                      {/* A4 Header */}
-                      <div className="flex justify-between items-start border-b border-slate-900 pb-2">
-                        <div>
-                          <div className="text-base font-black tracking-widest font-mono text-slate-900">VENVEX</div>
-                          <div className="text-[7px] font-mono text-slate-400 uppercase tracking-widest mt-0.5">Core Software Suite</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-[10px] font-bold tracking-widest uppercase">INVOICE</div>
-                          <div className="text-[7px] font-mono text-slate-400 mt-0.5">#INV-2026-009</div>
-                        </div>
+                {/* Hyper-realistic white A4 document layout preview */}
+                <div className="bg-white text-slate-900 rounded-lg p-5 flex flex-col justify-between min-h-[360px] text-left relative overflow-hidden shadow-2xl">
+                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
+                  <div>
+                    {/* A4 Header */}
+                    <div className="flex justify-between items-start border-b border-slate-900 pb-2">
+                      <div>
+                        <div className="text-base font-black tracking-widest font-mono text-slate-900">VENVEX</div>
+                        <div className="text-[7px] font-mono text-slate-400 uppercase tracking-widest mt-0.5">Core Software Suite</div>
                       </div>
-                      
-                      {/* Metadata */}
-                      <div className="grid grid-cols-2 gap-4 my-3 text-[8px] font-mono">
-                        <div>
-                          <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">ISSUER</div>
-                          <div className="font-bold text-slate-800">Venvex Core Systems, Inc.</div>
-                          <div className="text-slate-500">Edge Gateway Node US-01</div>
-                        </div>
-                        <div>
-                          <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">BILLED TO</div>
-                          <div className="font-bold text-slate-800">{heroClient || 'Client Name'}</div>
-                          <div className="text-slate-500">Sandbox Client Session</div>
-                        </div>
+                      <div className="text-right">
+                        <div className="text-[10px] font-bold tracking-widest uppercase">INVOICE</div>
+                        <div className="text-[7px] font-mono text-slate-400 mt-0.5">#INV-2026-009</div>
                       </div>
-                      
-                      {/* Item Table */}
-                      <table className="w-full text-left border-collapse text-[8px] my-3 font-mono">
-                        <thead>
-                          <tr className="border-b border-slate-300 text-[6px] font-bold text-slate-400 uppercase tracking-wider">
-                            <th className="py-1">Description</th>
-                            <th className="py-1 text-right">Qty</th>
-                            <th className="py-1 text-right">Rate</th>
-                            <th className="py-1 text-right">Total</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr className="border-b border-slate-100">
-                            <td className="py-2 font-medium text-slate-800 truncate max-w-[120px]">{heroItem || 'Item Description'}</td>
-                            <td className="py-2 text-right">{heroQty}</td>
-                            <td className="py-2 text-right">${heroRate.toFixed(2)}</td>
-                            <td className="py-2 text-right">${(heroQty * heroRate).toFixed(2)}</td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
                     
-                    {/* Totals & Stamp */}
-                    <div className="flex justify-between items-end border-t border-slate-200 pt-2 mt-auto">
-                      {/* Paid Stamp & Print Action */}
-                      <div className="flex flex-col gap-1 items-start">
-                        <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
-                          PAID // COMPILED
-                        </div>
-                        <button 
-                          onClick={exportInvoice}
-                          className="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-[7px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
-                        >
-                          [ Print A4 ]
-                        </button>
+                    {/* Metadata */}
+                    <div className="grid grid-cols-2 gap-4 my-3 text-[8px] font-mono">
+                      <div>
+                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">ISSUER</div>
+                        <div className="font-bold text-slate-800">Venvex Core Systems, Inc.</div>
+                        <div className="text-slate-500">Edge Gateway Node US-01</div>
                       </div>
-                      
-                      <div className="text-right space-y-0.5 text-[8px] w-1/2 font-mono">
-                        <div className="flex justify-between text-slate-500">
-                          <span>Subtotal:</span>
-                          <span>${(heroQty * heroRate).toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between text-slate-500">
-                          <span>GST ({heroTaxRate}%):</span>
-                          <span>${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between text-slate-900 font-bold border-t border-slate-300 pt-1 text-[9px]">
-                          <span>Grand Total:</span>
-                          <span>${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
-                        </div>
+                      <div>
+                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">BILLED TO</div>
+                        <div className="font-bold text-slate-800">{heroClient || 'Client Name'}</div>
+                        <div className="text-slate-500">Sandbox Client Session</div>
+                      </div>
+                    </div>
+                    
+                    {/* Item Table */}
+                    <table className="w-full text-left border-collapse text-[8px] my-3 font-mono">
+                      <thead>
+                        <tr className="border-b border-slate-300 text-[6px] font-bold text-slate-400 uppercase tracking-wider">
+                          <th className="py-1">Description</th>
+                          <th className="py-1 text-right">Qty</th>
+                          <th className="py-1 text-right">Rate</th>
+                          <th className="py-1 text-right">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b border-slate-100">
+                          <td className="py-2 font-medium text-slate-800 truncate max-w-[120px]">{heroItem || 'Item Description'}</td>
+                          <td className="py-2 text-right">{heroQty}</td>
+                          <td className="py-2 text-right">${heroRate.toFixed(2)}</td>
+                          <td className="py-2 text-right">${(heroQty * heroRate).toFixed(2)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  {/* Totals & Stamp */}
+                  <div className="flex justify-between items-end border-t border-slate-200 pt-2 mt-auto">
+                    {/* Paid Stamp & Print Action */}
+                    <div className="flex flex-col gap-1 items-start">
+                      <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
+                        PAID // COMPILED
+                      </div>
+                      <button 
+                        onClick={exportInvoice}
+                        className="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-[7px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
+                      >
+                        [ Print A4 ]
+                      </button>
+                    </div>
+                    
+                    <div className="text-right space-y-0.5 text-[8px] w-1/2 font-mono">
+                      <div className="flex justify-between text-slate-500">
+                        <span>Subtotal:</span>
+                        <span>${(heroQty * heroRate).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-500">
+                        <span>GST ({heroTaxRate}%):</span>
+                        <span>${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between text-slate-900 font-bold border-t border-slate-300 pt-1 text-[9px]">
+                        <span>Grand Total:</span>
+                        <span>${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
                       </div>
                     </div>
                   </div>
-
                 </div>
-              </div>
 
+              </div>
             </div>
 
           </div>
 
-          {/* Bento Grid (UtilityVault) */}
-          <section id="grid-section" className="mt-24 md:mt-36 space-y-8 scroll-mt-24">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-border-dark pb-4">
-              <div>
-                <span className="text-xs font-mono text-accent-emerald tracking-widest uppercase">// THE VAULT</span>
-                <h2 className="text-2xl font-bold tracking-tight mt-1">Select Your Engine Component.</h2>
+          {/* Symmetrical Sided Bento Row (Matching the layout mockup) */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mt-12 md:mt-16 z-20">
+            
+            {/* Left Column: Glass Invoicely Card */}
+            <div 
+              onClick={handleInvoiceGeneratorClick}
+              onMouseMove={handleMouseMove}
+              className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[280px] cursor-pointer overflow-hidden text-left"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between items-start">
+                  <div className="w-9 h-9 rounded bg-emerald-950/30 border border-emerald-900/50 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform relative z-10">
+                    <FileText className="w-4 h-4" />
+                  </div>
+                  <span className="text-[9px] font-mono uppercase font-bold tracking-widest text-accent-emerald bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/40 relative z-10">
+                    Module 01
+                  </span>
+                </div>
+                <div className="space-y-1 relative z-10">
+                  <h3 className="text-base font-bold group-hover:text-accent-emerald transition-colors font-mono text-white">Invoicely Engine v1.0</h3>
+                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">Mobile Billing / High-Speed Generation</div>
+                  <p className="text-xs text-text-slate leading-relaxed pt-2">
+                    A zero-bloat mobile billing utility designed for immediate execution. Generate hyper-minimalist, professional A4 invoices instantly.
+                  </p>
+                </div>
               </div>
-              <div className="text-xs text-text-slate flex items-center gap-4 font-mono">
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-accent-emerald" /> Active</span>
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" /> Compiling</span>
-                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-gray-600" /> Planned</span>
+
+              <div className="pt-3 border-t border-border-dark/60 flex items-center justify-between text-[9px] font-mono relative z-10">
+                <span className="font-bold text-accent-emerald">
+                  0.04s Generation
+                </span>
+                <ChevronRight className="w-3.5 h-3.5 text-text-slate group-hover:text-accent-emerald group-hover:translate-x-1 transition-all" />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Card 1: Invoicely */}
-              <div 
-                onClick={handleInvoiceGeneratorClick}
-                onMouseMove={handleMouseMove}
-                className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer overflow-hidden"
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded bg-emerald-950/30 border border-emerald-900/50 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform relative z-10">
-                      <FileText className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-accent-emerald bg-emerald-950/40 px-2.5 py-1 rounded border border-emerald-900/40 relative z-10">
-                      Module 01
-                    </span>
-                  </div>
-                  <div className="space-y-2 relative z-10">
-                    <h3 className="text-lg font-bold group-hover:text-accent-emerald transition-colors font-mono">Invoicely Engine v1.0</h3>
-                    <div className="text-[10px] font-mono text-text-slate uppercase tracking-wider">Mobile Billing / High-Speed Generation</div>
-                    <p className="text-xs text-text-slate leading-relaxed">
-                      A zero-bloat mobile billing utility designed for immediate execution. Generate hyper-minimalist, professional A4 invoices instantly without touching heavy enterprise accounting platforms.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Minimalist professional white A4 preview widget breaking cleanly out of a dark container line */}
-                <div className="absolute -bottom-4 left-6 right-6 h-20 bg-white border border-slate-200 shadow-2xl rounded-t-md p-2 overflow-hidden text-slate-800 flex flex-col justify-between text-[5px] font-mono transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-10">
-                  <div className="flex justify-between items-start border-b border-slate-300 pb-0.5">
-                    <span className="font-bold tracking-tighter">VENVEX // INVOICELY</span>
-                    <span>#INV-2026</span>
-                  </div>
-                  <div className="flex justify-between items-center text-[6px] font-bold">
-                    <span className="text-accent-emerald font-black">PAID // EDGE</span>
-                    <span>$1,440.00</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-border-dark/60 flex items-center justify-between text-[10px] font-mono relative z-10 bg-card-bg/90">
-                  <span className="font-bold text-accent-emerald">
-                    0.04s Generation Time
-                  </span>
-                  <ChevronRight className="w-4 h-4 text-text-slate group-hover:text-accent-emerald group-hover:translate-x-1 transition-all" />
-                </div>
-              </div>
-
-              {/* Card 2: Webhooks (Route) */}
-              <div 
-                onClick={() => setActiveModal('webhook')}
-                onMouseMove={handleMouseMove}
-                className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer"
-              >
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform relative z-10">
-                      <Terminal className="w-5 h-5" />
-                    </div>
-                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-amber-500 bg-amber-950/30 px-2.5 py-1 rounded border border-amber-900/30 relative z-10">
-                      Module 02
-                    </span>
-                  </div>
-                  <div className="space-y-2 relative z-10">
-                    <h3 className="text-lg font-bold group-hover:text-amber-500 transition-colors font-mono">Venvex Route v1.2</h3>
-                    <div className="text-[10px] font-mono text-text-slate uppercase tracking-wider">Automation / Data Routing</div>
-                    <p className="text-xs text-text-slate leading-relaxed">
-                      A low-latency automation and webhook engine engineered to process, filter, and pipe massive JSON streams across infrastructure layers without drops.
-                    </p>
-                  </div>
-                </div>
-
-                {/* macOS Mini IDE style console */}
-                <div className="bg-black/80 border border-border-dark/60 rounded-lg p-3 h-20 font-mono text-[8px] space-y-1 relative pt-7 overflow-hidden z-10">
-                  {/* Window Controls */}
-                  <div className="absolute top-2.5 left-3.5 flex gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#EF4444]/70" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]/70" />
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]/70" />
-                  </div>
-                  <div className="text-emerald-500 font-bold">
-                    POST <span className="text-[#00F2FE]">/v1/broadcast</span> <span className="text-slate-500">- HTTP 200 OK</span>
-                  </div>
-                  <div className="text-slate-400">
-                    {"{"} <span className="text-[#F59E0B]">"relayed"</span>: <span className="text-emerald-400">true</span>, <span className="text-[#F59E0B]">"latencyMs"</span>: <span className="text-emerald-400">14</span> {"}"}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-border-dark/60 flex items-center justify-between text-[10px] font-mono relative z-10">
-                  <span className="font-bold text-amber-500">
-                    99.999% Core Uptime
-                  </span>
-                  <ChevronRight className="w-4 h-4 text-text-slate group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
-                </div>
-              </div>
-
-              {/* Card 3: [ Empty Slot // Allocation Pending ] */}
-              <div 
-                onMouseMove={handleMouseMove}
-                className="group glass-card spotlight-card border border-dashed border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] overflow-hidden"
-              >
-                {/* Dashed Background Grid overlay */}
-                <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
-                
-                <div className="space-y-4 relative z-10">
-                  <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 rounded border border-dashed border-border-dark flex items-center justify-center text-text-slate">
-                      <Plus className="w-5 h-5 text-text-slate" />
-                    </div>
-                    <span className="text-[10px] font-mono uppercase font-bold tracking-widest text-text-slate border border-dashed border-border-dark px-2.5 py-1 rounded">
-                      Module 03
-                    </span>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-bold text-text-slate font-mono">Module 03 Allocation</h3>
-                    <div className="text-[10px] font-mono text-text-slate uppercase tracking-wider">Pipeline / In Development</div>
-                    <p className="text-xs text-text-slate leading-relaxed">
-                      Slot reserved for incoming single-purpose developer utilities. Venvex is scaling rapidly, deploying dedicated processing tools directly into the unified dashboard ecosystem.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="border border-dashed border-border-dark/60 rounded p-4 text-center font-mono text-[9px] text-text-slate relative z-10">
-                  // ENCRYPTED PROTOCOL RESERVATION
-                </div>
-
-                <div className="pt-4 border-t border-dashed border-border-dark/60 flex items-center justify-between text-[10px] font-mono relative z-10 text-text-slate">
-                  <span className="font-bold flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-slate-600" />
-                    Status: Queued
-                  </span>
-                  <span>[ Pending ]</span>
-                </div>
-              </div>
-
-            </div>
-          </section>
-
-          {/* High-Converting Bottom CTA */}
-          <section className="mt-28 md:mt-36 max-w-4xl mx-auto w-full text-center space-y-6 md:space-y-8 pb-12">
-            <div className="flex flex-col items-center justify-center space-y-6">
-              
+            {/* Center Column: Center CTA Layout */}
+            <div className="flex flex-col items-center justify-center space-y-5 text-center px-4">
               {/* Centered System Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-slate-950/80 border border-white/5 text-[9px] font-mono tracking-widest text-accent-emerald shadow-inner uppercase">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-accent-emerald animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-slate-950/80 border border-white/5 text-[9px] font-mono tracking-widest text-[#10B981] shadow-inner uppercase">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse" />
                 [ System Log: Ven_Core_Active ]
               </div>
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 font-sans">
                 Ready to Deploy?
               </h2>
-              <p className="text-xs sm:text-sm text-text-slate max-w-lg mx-auto leading-relaxed">
+              
+              <p className="text-xs text-text-slate max-w-xs leading-relaxed">
                 Stop paying for feature-bloat. Integrate isolated, high-performance tools directly into your active workflow layers.
               </p>
               
@@ -717,13 +632,54 @@ export default function Home() {
                       setActiveModal('auth');
                     }
                   }}
-                  className="px-8 py-3.5 rounded glow-button text-dark-bg font-bold font-mono text-xs uppercase tracking-wider hover:scale-[1.02] transition-all cursor-pointer"
+                  className="px-8 py-3.5 rounded glow-button text-dark-bg font-bold font-mono text-xs uppercase tracking-wider hover:scale-[1.02] transition-all cursor-pointer animate-pulse"
                 >
                   [ Secure Instant Access ]
                 </button>
               </div>
             </div>
-          </section>
+
+            {/* Right Column: Module 03 Allocation Card */}
+            <div 
+              onMouseMove={handleMouseMove}
+              className="group glass-card spotlight-card border border-dashed border-border-dark rounded-xl p-6 flex flex-col justify-between h-[280px] overflow-hidden text-left"
+            >
+              {/* Dashed Background Grid overlay */}
+              <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
+              
+              <div className="space-y-4 relative z-10">
+                <div className="flex justify-between items-start">
+                  <div className="w-9 h-9 rounded border border-dashed border-border-dark flex items-center justify-center text-text-slate">
+                    <Plus className="w-4 h-4 text-text-slate" />
+                  </div>
+                  <span className="text-[9px] font-mono uppercase font-bold tracking-widest text-text-slate border border-dashed border-border-dark px-2 py-0.5 rounded">
+                    Module 03
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-base font-bold text-text-slate font-mono">Module 03 Allocation</h3>
+                  <div className="text-[9px] font-mono text-text-slate uppercase tracking-wider">Pipeline / In Development</div>
+                  <p className="text-xs text-text-slate leading-relaxed pt-2">
+                    Slot reserved for incoming single-purpose developer utilities. Deploying dedicated processing tools directly.
+                  </p>
+                </div>
+              </div>
+
+              <div className="border border-dashed border-border-dark/60 rounded py-1.5 text-center font-mono text-[8px] text-text-slate relative z-10">
+                // ENCRYPTED PROTOCOL RESERVATION
+              </div>
+
+              <div className="pt-3 border-t border-dashed border-border-dark/60 flex items-center justify-between text-[9px] font-mono relative z-10 text-text-slate">
+                <span className="font-bold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-600" />
+                  Status: Queued
+                </span>
+                <span>[ Pending ]</span>
+              </div>
+            </div>
+
+          </div>
+
         </main>
 
 
