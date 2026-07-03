@@ -390,156 +390,153 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Shifting A4 Interactive Preview */}
-            <div className="relative mt-12 md:mt-20 w-full max-w-4xl mx-auto group z-20">
-              {/* Ambient Glowing Background */}
-              <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-accent-emerald/10 to-teal-500/10 blur-xl opacity-50 group-hover:opacity-70 transition-opacity pointer-events-none" />
+            {/* Shifting A4 Interactive Preview on a 3D Pedestal */}
+            <div className="relative mt-12 md:mt-24 w-full max-w-4xl mx-auto z-20 flex flex-col md:flex-row gap-8 items-center justify-center">
               
-              {/* Frame Container */}
-              <div className="relative bg-slate-950/70 border border-white/5 border-t-white/10 rounded-xl p-4 md:p-8 backdrop-blur-md overflow-hidden flex flex-col md:flex-row gap-6 items-stretch shadow-2xl">
-                {/* Control Panel (left) */}
-                <div className="md:w-1/3 flex flex-col justify-between space-y-4 text-left border-b md:border-b-0 md:border-r border-border-dark pb-4 md:pb-0 md:pr-6">
-                  <div className="space-y-4">
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-accent-emerald flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-ping" />
-                      Live Billing Engine
-                    </div>
-                    <h3 className="text-sm font-bold text-white font-mono uppercase tracking-wider">Invoicely Sandbox</h3>
-                    <p className="text-xs text-text-slate leading-relaxed">
-                      Modify layout values here to watch the compiled A4 template calculate instantly.
-                    </p>
-                    
-                    <div className="space-y-2.5 text-xs font-mono">
-                      <div>
-                        <label className="block text-[9px] text-text-slate uppercase mb-1">Client Name</label>
-                        <input 
-                          type="text" 
-                          value={heroClient} 
-                          onChange={(e) => setHeroClient(e.target.value)}
-                          className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-[9px] text-text-slate uppercase mb-1">Item Description</label>
-                        <input 
-                          type="text" 
-                          value={heroItem} 
-                          onChange={(e) => setHeroItem(e.target.value)}
-                          className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div>
-                          <label className="block text-[9px] text-text-slate uppercase mb-1">Quantity</label>
-                          <input 
-                            type="number" 
-                            value={heroQty} 
-                            onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
-                            className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-[9px] text-text-slate uppercase mb-1">Rate ($)</label>
-                          <input 
-                            type="number" 
-                            value={heroRate} 
-                            onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
-                            className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                          />
-                        </div>
-                      </div>
-                    </div>
+              {/* Sleek, collapsible Sandbox Input Controller (Floating on the left) */}
+              <div className="w-full md:w-[260px] bg-slate-950/80 border border-white/5 rounded-xl p-5 backdrop-blur-md text-left shadow-2xl relative z-30 self-center">
+                <div className="text-[10px] font-mono text-accent-emerald mb-3 tracking-widest flex items-center gap-1.5 uppercase">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-ping" />
+                  Sandbox Controller
+                </div>
+                <div className="space-y-3 font-mono text-xs">
+                  <div>
+                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Client Name</label>
+                    <input 
+                      type="text" 
+                      value={heroClient} 
+                      onChange={(e) => setHeroClient(e.target.value)}
+                      className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                    />
                   </div>
-                  
-                  <div className="pt-4 border-t border-border-dark text-[10px] font-mono text-text-slate space-y-1">
-                    <div>RENDER LATENCY: <span className="text-accent-emerald font-bold">0.04s (Instant)</span></div>
-                    <div>ENVELOPE SIGN: <span className="text-accent-emerald font-bold">SHA-256 SECURE</span></div>
+                  <div>
+                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Item Description</label>
+                    <input 
+                      type="text" 
+                      value={heroItem} 
+                      onChange={(e) => setHeroItem(e.target.value)}
+                      className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Qty</label>
+                      <input 
+                        type="number" 
+                        value={heroQty} 
+                        onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
+                        className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Rate ($)</label>
+                      <input 
+                        type="number" 
+                        value={heroRate} 
+                        onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
+                        className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                      />
+                    </div>
                   </div>
                 </div>
-                
-                {/* Hyper-realistic white A4 document layout preview (right) */}
-                <div className="flex-1 bg-white text-slate-900 rounded-lg p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)] flex flex-col justify-between min-h-[380px] text-left transform md:rotate-1 md:group-hover:rotate-0 transition-transform duration-300 relative">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
-                  <div>
-                    {/* A4 Header */}
-                    <div className="flex justify-between items-start border-b border-slate-900 pb-3">
-                      <div>
-                        <div className="text-lg font-black tracking-widest font-mono text-slate-900">VENVEX</div>
-                        <div className="text-[8px] font-mono text-slate-400 uppercase tracking-widest mt-0.5">Core Software Suite</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xs font-bold tracking-widest uppercase">INVOICE</div>
-                        <div className="text-[8px] font-mono text-slate-400 mt-0.5">#INV-2026-009</div>
-                      </div>
-                    </div>
-                    
-                    {/* Metadata */}
-                    <div className="grid grid-cols-2 gap-4 my-4 text-[9px] font-mono">
-                      <div>
-                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[7px] mb-0.5">ISSUER</div>
-                        <div className="font-bold text-slate-800">Venvex Core Systems, Inc.</div>
-                        <div className="text-slate-500">Edge Gateway Node US-01</div>
-                      </div>
-                      <div>
-                        <div className="text-slate-400 font-bold uppercase tracking-wider text-[7px] mb-0.5">BILLED TO</div>
-                        <div className="font-bold text-slate-800">{heroClient || 'Client Name'}</div>
-                        <div className="text-slate-500">Sandbox Client Session</div>
-                      </div>
-                    </div>
-                    
-                    {/* Item Table */}
-                    <table className="w-full text-left border-collapse text-[9px] my-4 font-mono">
-                      <thead>
-                        <tr className="border-b border-slate-300 text-[7px] font-bold text-slate-400 uppercase tracking-wider">
-                          <th className="py-1">Description</th>
-                          <th className="py-1 text-right">Qty</th>
-                          <th className="py-1 text-right">Rate</th>
-                          <th className="py-1 text-right">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-b border-slate-100">
-                          <td className="py-2.5 font-medium text-slate-800">{heroItem || 'Item Description'}</td>
-                          <td className="py-2.5 text-right">{heroQty}</td>
-                          <td className="py-2.5 text-right">${heroRate.toFixed(2)}</td>
-                          <td className="py-2.5 text-right">${(heroQty * heroRate).toFixed(2)}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                  {/* Totals & Stamp */}
-                  <div className="flex justify-between items-end border-t border-slate-200 pt-3 mt-auto">
-                    {/* Paid Stamp & Print Action */}
-                    <div className="flex flex-col gap-2 items-start">
-                      <div className="border-2 border-accent-emerald text-accent-emerald text-[8px] font-black tracking-widest uppercase px-2.5 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
-                        PAID // COMPILED
-                      </div>
-                      <button 
-                        onClick={exportInvoice}
-                        className="px-2 py-1 rounded bg-slate-900 text-white font-mono text-[8px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
-                      >
-                        [ Export PDF ]
-                      </button>
-                    </div>
-                    
-                    <div className="text-right space-y-0.5 text-[9px] w-1/2 font-mono">
-                      <div className="flex justify-between text-slate-500">
-                        <span>Subtotal:</span>
-                        <span>${(heroQty * heroRate).toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-500">
-                        <span>GST ({heroTaxRate}%):</span>
-                        <span>${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between text-slate-900 font-bold border-t border-slate-300 pt-1 text-xs">
-                        <span>Grand Total:</span>
-                        <span>${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
-                      </div>
-                    </div>
-                  </div>
+                <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-text-slate mt-4 space-y-1">
+                  <div>COMPILE SPEED: <span className="text-accent-emerald font-bold">0.04s</span></div>
+                  <div>SECURITY: <span className="text-accent-emerald">SHA-256 SIGNED</span></div>
                 </div>
               </div>
+
+              {/* Tilted Pedestal + A4 invoice block */}
+              <div className="pedestal-wrap flex-1 flex justify-center items-center">
+                <div className="pedestal-slab">
+                  {/* Neon Cyan Base Shadow underneath */}
+                  <div className="pedestal-glow" />
+
+                  {/* Hyper-realistic white A4 document layout preview */}
+                  <div className="bg-white text-slate-900 rounded-lg p-5 flex flex-col justify-between min-h-[360px] text-left relative overflow-hidden shadow-2xl">
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
+                    <div>
+                      {/* A4 Header */}
+                      <div className="flex justify-between items-start border-b border-slate-900 pb-2">
+                        <div>
+                          <div className="text-base font-black tracking-widest font-mono text-slate-900">VENVEX</div>
+                          <div className="text-[7px] font-mono text-slate-400 uppercase tracking-widest mt-0.5">Core Software Suite</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-[10px] font-bold tracking-widest uppercase">INVOICE</div>
+                          <div className="text-[7px] font-mono text-slate-400 mt-0.5">#INV-2026-009</div>
+                        </div>
+                      </div>
+                      
+                      {/* Metadata */}
+                      <div className="grid grid-cols-2 gap-4 my-3 text-[8px] font-mono">
+                        <div>
+                          <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">ISSUER</div>
+                          <div className="font-bold text-slate-800">Venvex Core Systems, Inc.</div>
+                          <div className="text-slate-500">Edge Gateway Node US-01</div>
+                        </div>
+                        <div>
+                          <div className="text-slate-400 font-bold uppercase tracking-wider text-[6px] mb-0.5">BILLED TO</div>
+                          <div className="font-bold text-slate-800">{heroClient || 'Client Name'}</div>
+                          <div className="text-slate-500">Sandbox Client Session</div>
+                        </div>
+                      </div>
+                      
+                      {/* Item Table */}
+                      <table className="w-full text-left border-collapse text-[8px] my-3 font-mono">
+                        <thead>
+                          <tr className="border-b border-slate-300 text-[6px] font-bold text-slate-400 uppercase tracking-wider">
+                            <th className="py-1">Description</th>
+                            <th className="py-1 text-right">Qty</th>
+                            <th className="py-1 text-right">Rate</th>
+                            <th className="py-1 text-right">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b border-slate-100">
+                            <td className="py-2 font-medium text-slate-800 truncate max-w-[120px]">{heroItem || 'Item Description'}</td>
+                            <td className="py-2 text-right">{heroQty}</td>
+                            <td className="py-2 text-right">${heroRate.toFixed(2)}</td>
+                            <td className="py-2 text-right">${(heroQty * heroRate).toFixed(2)}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                    {/* Totals & Stamp */}
+                    <div className="flex justify-between items-end border-t border-slate-200 pt-2 mt-auto">
+                      {/* Paid Stamp & Print Action */}
+                      <div className="flex flex-col gap-1 items-start">
+                        <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
+                          PAID // COMPILED
+                        </div>
+                        <button 
+                          onClick={exportInvoice}
+                          className="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-[7px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
+                        >
+                          [ Print A4 ]
+                        </button>
+                      </div>
+                      
+                      <div className="text-right space-y-0.5 text-[8px] w-1/2 font-mono">
+                        <div className="flex justify-between text-slate-500">
+                          <span>Subtotal:</span>
+                          <span>${(heroQty * heroRate).toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-slate-500">
+                          <span>GST ({heroTaxRate}%):</span>
+                          <span>${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between text-slate-900 font-bold border-t border-slate-300 pt-1 text-[9px]">
+                          <span>Grand Total:</span>
+                          <span>${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
 
           </div>
@@ -564,7 +561,7 @@ export default function Home() {
               <div 
                 onClick={handleInvoiceGeneratorClick}
                 onMouseMove={handleMouseMove}
-                className="group spotlight-card bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer overflow-hidden"
+                className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer overflow-hidden"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
@@ -608,7 +605,7 @@ export default function Home() {
               <div 
                 onClick={() => setActiveModal('webhook')}
                 onMouseMove={handleMouseMove}
-                className="group spotlight-card bg-card-bg border border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer"
+                className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[340px] cursor-pointer"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
@@ -655,7 +652,7 @@ export default function Home() {
               {/* Card 3: [ Empty Slot // Allocation Pending ] */}
               <div 
                 onMouseMove={handleMouseMove}
-                className="group spotlight-card border border-dashed border-border-dark bg-transparent rounded-xl p-6 flex flex-col justify-between h-[340px] overflow-hidden"
+                className="group glass-card spotlight-card border border-dashed border-border-dark rounded-xl p-6 flex flex-col justify-between h-[340px] overflow-hidden"
               >
                 {/* Dashed Background Grid overlay */}
                 <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-20" />
@@ -696,18 +693,22 @@ export default function Home() {
 
           {/* High-Converting Bottom CTA */}
           <section className="mt-28 md:mt-36 max-w-4xl mx-auto w-full text-center space-y-6 md:space-y-8 pb-12">
-            <div className="bg-gradient-to-b from-[#111625] to-[#0B0F19] border border-border-dark rounded-2xl p-8 md:p-12 shadow-[0_8px_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
-              <div className="absolute -top-12 -left-12 w-48 h-48 bg-accent-emerald/5 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-accent-emerald/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="flex flex-col items-center justify-center space-y-6">
               
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+              {/* Centered System Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-slate-950/80 border border-white/5 text-[9px] font-mono tracking-widest text-accent-emerald shadow-inner uppercase">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-accent-emerald animate-pulse" />
+                [ System Log: Ven_Core_Active ]
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 font-sans">
                 Ready to Deploy?
               </h2>
-              <p className="text-sm sm:text-base text-text-slate max-w-xl mx-auto mt-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-text-slate max-w-lg mx-auto leading-relaxed">
                 Stop paying for feature-bloat. Integrate isolated, high-performance tools directly into your active workflow layers.
               </p>
               
-              <div className="mt-8">
+              <div className="pt-2">
                 <button 
                   onClick={() => {
                     if (sessionUser) {
@@ -716,7 +717,7 @@ export default function Home() {
                       setActiveModal('auth');
                     }
                   }}
-                  className="px-8 py-3.5 rounded bg-accent-emerald text-dark-bg font-bold font-mono text-xs uppercase tracking-wider hover:bg-emerald-400 transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.25)] hover:scale-[1.02] cursor-pointer"
+                  className="px-8 py-3.5 rounded glow-button text-dark-bg font-bold font-mono text-xs uppercase tracking-wider hover:scale-[1.02] transition-all cursor-pointer"
                 >
                   [ Secure Instant Access ]
                 </button>
