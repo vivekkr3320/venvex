@@ -87,6 +87,94 @@ const TechBackground = () => (
   </div>
 );
 
+const ScrewHead = ({ className = '' }: { className?: string }) => (
+  <div className={`screw-head absolute ${className}`} />
+);
+
+const RockerSwitch = ({
+  label,
+  active,
+  onChange
+}: {
+  label: string;
+  active: boolean;
+  onChange: (val: boolean) => void;
+}) => {
+  return (
+    <div className="flex items-center justify-between font-mono text-[9px] text-slate-400">
+      <span className="uppercase tracking-wider">{label}</span>
+      <div 
+        className={`rocker-switch ${active ? 'active' : ''}`}
+        onClick={() => onChange(!active)}
+      >
+        <div className="rocker-switch-toggle" />
+      </div>
+    </div>
+  );
+};
+
+const RotaryKnob = ({ 
+  label, 
+  value, 
+  min, 
+  max, 
+  onChange, 
+  suffix = '' 
+}: { 
+  label: string; 
+  value: number; 
+  min: number; 
+  max: number; 
+  onChange: (val: number) => void;
+  suffix?: string;
+}) => {
+  const [rotation, setRotation] = useState(0);
+
+  useEffect(() => {
+    const percent = (value - min) / (max - min);
+    const angle = percent * 270 - 135;
+    setRotation(angle);
+  }, [value, min, max]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const startY = e.clientY;
+    const startValue = value;
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      const deltaY = startY - moveEvent.clientY;
+      const range = max - min;
+      const step = range / 120;
+      const newValue = Math.max(min, Math.min(max, Math.round(startValue + deltaY * step)));
+      onChange(newValue);
+    };
+
+    const handleMouseUp = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+
+  return (
+    <div className="knob-container">
+      <span className="text-[8px] font-mono text-slate-400 uppercase mb-1 tracking-wider">{label}</span>
+      <div 
+        className="knob-dial"
+        style={{ transform: `rotate(${rotation}deg)` }}
+        onMouseDown={handleMouseDown}
+      >
+        <div className="knob-pointer" />
+      </div>
+      <span className="text-[9px] font-mono text-white mt-1.5 font-bold">
+        {value}{suffix}
+      </span>
+    </div>
+  );
+};
+
 export default function Home() {
   // Navigation active links / simulated route
   const [activeTab, setActiveTab] = useState<'all' | 'specs' | 'changelog'>('all');
@@ -427,65 +515,92 @@ export default function Home() {
           <div className="relative mt-8 md:mt-12 w-full max-w-5xl mx-auto z-20 flex flex-col md:flex-row gap-8 items-center justify-center">
             
             {/* Sleek, collapsible Sandbox Input Controller (Floating on the left) */}
-            <div className="w-full md:w-[260px] bg-slate-950/80 border border-white/5 rounded-xl p-5 backdrop-blur-md text-left shadow-2xl relative z-30 self-center">
-              <div className="text-[10px] font-mono text-accent-emerald mb-3 tracking-widest flex items-center gap-1.5 uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-ping" />
-                Sandbox Controller
+            <div className="w-full md:w-[260px] bg-slate-900 border border-slate-950 rounded-xl p-5 text-left shadow-2xl relative z-30 self-center brushed-metal overflow-hidden">
+              <div className="glass-plate-gloss" />
+              {/* Corner Screws */}
+              <ScrewHead className="top-2 left-2" />
+              <ScrewHead className="top-2 right-2" />
+              <ScrewHead className="bottom-2 left-2" />
+              <ScrewHead className="bottom-2 right-2" />
+
+              <div className="text-[10px] font-mono text-accent-emerald mb-4 tracking-widest flex items-center gap-1.5 uppercase pl-2 font-bold">
+                <span className="flex led-indicator led-green animate-pulse" />
+                Console Desk
               </div>
-              <div className="space-y-3 font-mono text-xs">
+              <div className="space-y-4 font-mono text-xs relative z-10 px-1">
                 <div>
-                  <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Client Name</label>
+                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Client Name</label>
                   <input 
                     type="text" 
                     value={heroClient} 
                     onChange={(e) => setHeroClient(e.target.value)}
-                    className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                    className="w-full bg-black/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-[10px] font-mono engraved-well"
                   />
                 </div>
                 <div>
-                  <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Item Description</label>
+                  <label className="block text-[8px] text-slate-400 uppercase tracking-wider mb-1 font-bold">Item Description</label>
                   <input 
                     type="text" 
                     value={heroItem} 
                     onChange={(e) => setHeroItem(e.target.value)}
-                    className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
+                    className="w-full bg-black/60 border border-border-dark rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-[10px] font-mono engraved-well"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Qty</label>
-                    <input 
-                      type="number" 
-                      value={heroQty} 
-                      onChange={(e) => setHeroQty(Math.max(1, Number(e.target.value)))}
-                      className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[8px] text-text-slate uppercase tracking-wider mb-1">Rate ($)</label>
-                    <input 
-                      type="number" 
-                      value={heroRate} 
-                      onChange={(e) => setHeroRate(Math.max(0, Number(e.target.value)))}
-                      className="w-full bg-black/40 border border-white/5 focus:border-emerald-500/50 rounded px-2.5 py-1.5 text-white focus:outline-none transition-all text-xs font-mono"
-                    />
-                  </div>
+
+                {/* Tactile Rotary Knobs side-by-side */}
+                <div className="grid grid-cols-2 gap-2 pt-2 pb-1 border-t border-b border-white/5">
+                  <RotaryKnob 
+                    label="Rate ($)" 
+                    value={heroRate} 
+                    min={0} 
+                    max={150} 
+                    onChange={(val) => setHeroRate(val)} 
+                  />
+                  <RotaryKnob 
+                    label="Quantity" 
+                    value={heroQty} 
+                    min={1} 
+                    max={50} 
+                    onChange={(val) => setHeroQty(val)} 
+                  />
+                </div>
+
+                {/* Tactile Switch to Toggle paid status */}
+                <div className="pt-1">
+                  <RockerSwitch 
+                    label="PAID STATE"
+                    active={heroTaxRate === 18} 
+                    onChange={(val) => setHeroTaxRate(val ? 18 : 0)}
+                  />
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-text-slate mt-4 space-y-1">
-                <div>COMPILE SPEED: <span className="text-accent-emerald font-bold">0.04s</span></div>
-                <div>SECURITY: <span className="text-accent-emerald">SHA-256 SIGNED</span></div>
+              
+              <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-slate-400 mt-4 space-y-1 relative z-10 pl-1">
+                <div className="flex items-center gap-1.5">
+                  <span className="flex led-indicator led-green" />
+                  COMPILE SPEED: <span className="text-accent-emerald font-bold">0.04s</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="flex led-indicator led-amber" />
+                  SECURITY: <span className="text-amber-500">SHA-256</span>
+                </div>
               </div>
             </div>
 
             {/* Tilted Pedestal + A4 invoice block */}
             <div className="pedestal-wrap flex-1 flex justify-center items-center">
-              <div className="pedestal-slab">
+              <div className="pedestal-slab brushed-metal">
+                {/* Corner Screws */}
+                <ScrewHead className="top-3 left-3" />
+                <ScrewHead className="top-3 right-3" />
+                <ScrewHead className="bottom-3 left-3" />
+                <ScrewHead className="bottom-3 right-3" />
+
                 {/* Neon Cyan Base Shadow underneath */}
                 <div className="pedestal-glow" />
 
                 {/* Hyper-realistic white A4 document layout preview */}
-                <div className="bg-white text-slate-900 rounded-lg p-5 flex flex-col justify-between min-h-[360px] text-left relative overflow-hidden shadow-2xl">
+                <div className="bg-white text-slate-900 rounded-lg p-5 flex flex-col justify-between min-h-[360px] text-left relative overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.2)] border border-slate-300">
                   <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-slate-100 to-transparent pointer-events-none rounded-tr-lg" />
                   <div>
                     {/* A4 Header */}
@@ -539,9 +654,15 @@ export default function Home() {
                   <div className="flex justify-between items-end border-t border-slate-200 pt-2 mt-auto">
                     {/* Paid Stamp & Print Action */}
                     <div className="flex flex-col gap-1 items-start">
-                      <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
-                        PAID // COMPILED
-                      </div>
+                      {heroTaxRate === 18 ? (
+                        <div className="border border-accent-emerald text-accent-emerald text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse bg-emerald-50/50">
+                          PAID // COMPILED
+                        </div>
+                      ) : (
+                        <div className="border border-amber-500 text-amber-500 text-[7px] font-black tracking-widest uppercase px-2 py-0.5 rounded rotate-[2deg] font-mono">
+                          DRAFT // READY
+                        </div>
+                      )}
                       <button 
                         onClick={exportInvoice}
                         className="px-2 py-0.5 rounded bg-slate-900 text-white font-mono text-[7px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
@@ -579,9 +700,16 @@ export default function Home() {
             <div 
               onClick={handleInvoiceGeneratorClick}
               onMouseMove={handleMouseMove}
-              className="group glass-card spotlight-card rounded-xl p-6 flex flex-col justify-between h-[280px] cursor-pointer overflow-hidden text-left"
+              className="group glass-card glass-plate spotlight-card rounded-xl p-6 flex flex-col justify-between h-[280px] cursor-pointer overflow-hidden text-left"
             >
-              <div className="space-y-4">
+              <div className="glass-plate-gloss" />
+              {/* Corner Screws */}
+              <ScrewHead className="top-2.5 left-2.5" />
+              <ScrewHead className="top-2.5 right-2.5" />
+              <ScrewHead className="bottom-2.5 left-2.5" />
+              <ScrewHead className="bottom-2.5 right-2.5" />
+
+              <div className="space-y-4 relative z-10">
                 <div className="flex justify-between items-start">
                   <div className="w-9 h-9 rounded bg-emerald-950/30 border border-emerald-900/50 flex items-center justify-center text-accent-emerald group-hover:scale-110 transition-transform relative z-10">
                     <FileText className="w-4 h-4" />
@@ -642,8 +770,15 @@ export default function Home() {
             {/* Right Column: Module 03 Allocation Card */}
             <div 
               onMouseMove={handleMouseMove}
-              className="group glass-card spotlight-card border border-dashed border-border-dark rounded-xl p-6 flex flex-col justify-between h-[280px] overflow-hidden text-left"
+              className="group glass-card glass-plate spotlight-card border border-dashed border-border-dark rounded-xl p-6 flex flex-col justify-between h-[280px] overflow-hidden text-left"
             >
+              <div className="glass-plate-gloss" />
+              {/* Corner Screws */}
+              <ScrewHead className="top-2.5 left-2.5" />
+              <ScrewHead className="top-2.5 right-2.5" />
+              <ScrewHead className="bottom-2.5 left-2.5" />
+              <ScrewHead className="bottom-2.5 right-2.5" />
+
               {/* Dashed Background Grid overlay */}
               <div className="absolute inset-0 bg-[radial-gradient(#1f293d_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
               
