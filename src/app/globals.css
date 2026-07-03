@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #060911;
-  --color-card-bg: #0D111C;
+  --color-dark-bg: #0B0F19;
+  --color-card-bg: #121826;
   --color-accent-emerald: #10B981;
-  --color-border-dark: #1F2937;
+  --color-neon-cyan: #00F2FE;
+  --color-border-dark: #1F293D;
   --color-text-slate: #94A3B8;
 }
 
 :root {
-  --background: #060911;
+  --background: #0B0F19;
   --foreground: #ffffff;
 }
 
@@ -22,14 +23,14 @@ body {
 
 /* Custom premium styles */
 .grid-bg {
-  background-size: 40px 40px;
+  background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(31, 41, 55, 0.2) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(31, 41, 55, 0.2) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
 }
 
 .radial-glow {
-  background: radial-gradient(circle 800px at 50% 200px, rgba(16, 185, 129, 0.15), transparent 80%);
+  background: radial-gradient(circle 800px at 50% 200px, rgba(16, 185, 129, 0.07), transparent 80%);
 }
 
 .card-hover {
@@ -43,11 +44,22 @@ body {
 }
 
 .emerald-glow {
-  box-shadow: 0 0 20px 2px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 25px 2px rgba(16, 185, 129, 0.2);
 }
 
 .glow-text {
-  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  text-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.vertical-split-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03) 10%, rgba(255, 255, 255, 0.03) 90%, transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Premium scrollbar */
@@ -55,13 +67,14 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #060911;
+  background: #0B0F19;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1F2937;
+  background: #1F293D;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #10B981;
 }
+
 

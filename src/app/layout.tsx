@@ -13,13 +13,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "UtilityOS Hub | Micro-SaaS Tool Grid & Infrastructure",
-  description: "Single-purpose code. Zero operational bloat. UtilityOS deploys lightning-fast, hyper-focused micro-utilities exactly when you need them.",
-  keywords: ["UtilityOS", "Micro-SaaS", "Micro-tools", "Invoice Generator", "Developer Utilities", "Vercel", "Serverless Edge"],
-  authors: [{ name: "UtilityOS Team" }],
+  title: "VENVEX Core | Suite of Single-Purpose Software Modules",
+  description: "Venvex is a zero-bloat software ecosystem. We engineer razor-sharp, isolated micro-utilities designed to replace massive, heavy platforms with lightning-fast execution layers.",
+  keywords: ["VENVEX", "Invoicely", "Route", "Webhook Engine", "Micro-modules", "Developer Utilities", "Edge Computing"],
+  authors: [{ name: "VENVEX Core Team" }],
   openGraph: {
-    title: "UtilityOS Hub | Micro-SaaS Tool Grid",
-    description: "Single-purpose code. Zero operational bloat. Discover lightweight, edge-native single-purpose micro-utilities.",
+    title: "VENVEX Core | High-Performance Software Modules",
+    description: "Venvex is a zero-bloat software ecosystem. We engineer razor-sharp, isolated micro-utilities built for absolute speed.",
     type: "website",
   },
 };
