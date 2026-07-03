@@ -179,6 +179,93 @@ export default function Home() {
     }
   };
 
+  const exportInvoice = () => {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Invoice - VENVEX</title>
+          <style>
+            body { font-family: monospace; padding: 40px; color: #111; }
+            .header { display: flex; justify-content: space-between; border-bottom: 2px solid #000; padding-bottom: 10px; }
+            .meta { display: grid; grid-cols: 2; gap: 20px; margin: 20px 0; font-size: 12px; }
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 12px; }
+            th { border-bottom: 1px solid #000; padding: 5px 0; text-align: left; }
+            td { padding: 8px 0; }
+            .totals { margin-top: 30px; text-align: right; font-size: 12px; }
+            .stamp { border: 2px solid #10B981; color: #10B981; padding: 5px; display: inline-block; transform: rotate(-4deg); font-weight: bold; font-size: 10px; margin-top: 20px; }
+          </style>
+        </head>
+        <body>
+          <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 15px;">
+            <div>
+              <h2 style="margin: 0; font-size: 20px; letter-spacing: 2px;">VENVEX</h2>
+              <p style="font-size: 9px; color: #666; margin: 5px 0 0 0; letter-spacing: 1px;">CORE SOFTWARE SUITE</p>
+            </div>
+            <div style="text-align: right;">
+              <h2 style="margin: 0; font-size: 18px; letter-spacing: 1px;">INVOICE</h2>
+              <p style="font-size: 9px; color: #666; margin: 5px 0 0 0;">#INV-2026-009</p>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin: 30px 0; font-size: 11px;">
+            <div>
+              <strong style="font-size: 8px; color: #888;">ISSUER</strong><br/>
+              <strong>Venvex Core Systems, Inc.</strong><br/>
+              Edge Gateway Node US-01
+            </div>
+            <div style="text-align: right;">
+              <strong style="font-size: 8px; color: #888;">BILLED TO</strong><br/>
+              <strong>${heroClient}</strong><br/>
+              Sandbox Client Session
+            </div>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; margin: 35px 0; font-size: 11px;">
+            <thead>
+              <tr style="border-b: 1px solid #aaa; font-size: 9px; color: #666;">
+                <th style="padding: 6px 0; border-bottom: 1px solid #ccc;">Description</th>
+                <th style="padding: 6px 0; border-bottom: 1px solid #ccc; text-align: right;">Qty</th>
+                <th style="padding: 6px 0; border-bottom: 1px solid #ccc; text-align: right;">Rate</th>
+                <th style="padding: 6px 0; border-bottom: 1px solid #ccc; text-align: right;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px 0; font-weight: bold; border-bottom: 1px solid #eee;">${heroItem}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee; text-align: right;">${heroQty}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee; text-align: right;">$${heroRate.toFixed(2)}</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #eee; text-align: right;">$${(heroQty * heroRate).toFixed(2)}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-left: auto; width: 250px; font-size: 11px; margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; padding: 4px 0; color: #666;">
+              <span>Subtotal:</span>
+              <span>$${(heroQty * heroRate).toFixed(2)}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 4px 0; color: #666;">
+              <span>GST (${heroTaxRate}%):</span>
+              <span>$${((heroQty * heroRate) * (heroTaxRate / 100)).toFixed(2)}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-top: 1px solid #333; font-weight: bold; font-size: 13px; margin-top: 5px;">
+              <span>Grand Total:</span>
+              <span>$${((heroQty * heroRate) * (1 + heroTaxRate / 100)).toFixed(2)}</span>
+            </div>
+          </div>
+          <div style="margin-top: 50px; border: 2px solid #10B981; color: #10B981; padding: 8px 12px; display: inline-block; transform: rotate(-3deg); font-weight: bold; font-size: 10px; letter-spacing: 1px;">
+            PAID // COMPILED via VENVEX
+          </div>
+          <script>
+            window.onload = function() {
+              window.print();
+            }
+          </script>
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+
   return (
     <div className="relative min-h-screen bg-dark-bg text-white selection:bg-accent-emerald selection:text-dark-bg overflow-x-hidden">
       {/* Raw vertical layout separator line running down the screen */}
@@ -415,9 +502,17 @@ export default function Home() {
                   
                   {/* Totals & Stamp */}
                   <div className="flex justify-between items-end border-t border-slate-200 pt-3 mt-auto">
-                    {/* Paid Stamp */}
-                    <div className="border-2 border-accent-emerald text-accent-emerald text-[8px] font-black tracking-widest uppercase px-2.5 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
-                      PAID // COMPILED
+                    {/* Paid Stamp & Print Action */}
+                    <div className="flex flex-col gap-2 items-start">
+                      <div className="border-2 border-accent-emerald text-accent-emerald text-[8px] font-black tracking-widest uppercase px-2.5 py-0.5 rounded rotate-[-4deg] font-mono animate-pulse">
+                        PAID // COMPILED
+                      </div>
+                      <button 
+                        onClick={exportInvoice}
+                        className="px-2 py-1 rounded bg-slate-900 text-white font-mono text-[8px] uppercase tracking-wider hover:bg-black hover:text-accent-emerald transition-all cursor-pointer"
+                      >
+                        [ Export PDF ]
+                      </button>
                     </div>
                     
                     <div className="text-right space-y-0.5 text-[9px] w-1/2 font-mono">
